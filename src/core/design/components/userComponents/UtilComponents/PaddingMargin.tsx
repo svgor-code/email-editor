@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PaddingComponent({ props, setProp, styleProp }) {
+export function PaddingComponent({ props, setProp, styleProp = "parentStyle" }) {
   return (
     <SpacingChange
       props={props}
@@ -20,10 +20,8 @@ export function PaddingComponent({ props, setProp, styleProp }) {
     />
   );
 }
-PaddingComponent.defaultProps = {
-  styleProp: 'parentStyle',
-};
-export function MarginComponent({ props, setProp, styleProp }) {
+
+export function MarginComponent({ props, setProp, styleProp = "parentStyle" }) {
   return (
     <SpacingChange
       props={props}
@@ -33,9 +31,7 @@ export function MarginComponent({ props, setProp, styleProp }) {
     />
   );
 }
-MarginComponent.defaultProps = {
-  styleProp: 'parentStyle',
-};
+
 
 function SingleSpacingChange({
   propKey,
@@ -87,6 +83,7 @@ function SingleSpacingChange({
     </Box>
   );
 }
+
 function SpacingChange({ props, setProp, propType, styleProp }) {
   function getSpacing() {
     return props[styleProp];

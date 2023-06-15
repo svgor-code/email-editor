@@ -53,7 +53,7 @@ export const VideoSettings = () => {
         isSelfBg={false}
         defaultImage={VideoDefaultProps.parentStyle.backgroundImage}
       />
-      <BorderAccordion styleProp={{}} props={props} setProp={setProp} />
+      <BorderAccordion  props={props} setProp={setProp} />
     </div>
   );
 };

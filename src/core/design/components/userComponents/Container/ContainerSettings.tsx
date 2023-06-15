@@ -102,8 +102,6 @@ function Columns({ type, handleColumns, props }) {
           }}
           title="Change Columns"
           content={cnfContent}
-          yesLabel=""
-          noLabel=""
         />
       )}
     </>
@@ -196,7 +194,6 @@ export const ContainerSettings = () => {
     <>
       <AccordionHeader title={'Basic'} />
       <CustomAccordion
-        defaultExpanded={null}
         title="Columns"
         preview={
           <Box px={1} bgcolor="#f1f1f1" borderRadius={5}>
@@ -228,9 +225,8 @@ export const ContainerSettings = () => {
       />
       {props.props.containerType > 1 && (
         <CustomAccordion
-          preview={{}}
-          defaultExpanded={true}
           title="Column Properties"
+          defaultExpanded={true}
           children={
             <>
               <Tabs
@@ -248,7 +244,7 @@ export const ContainerSettings = () => {
                 })}
               </Tabs>
 
-              <ResizerSettings isParent={false} id={getNodeId(tabValue)} />
+              <ResizerSettings id={getNodeId(tabValue)} />
             </>
           }
         />

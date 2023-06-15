@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { Element, useNode } from '@craftjs/core';
 import React from 'react';
 import { Resizer } from './Resizer';
 import { ContainerDefaultProps, ContainerSettings } from './ContainerSettings';
-import { Grid } from '@material-ui/core';
+import { Grid, GridSize } from '@material-ui/core';
 
 export const Container = ({ children, style, parentStyle, props }) => {
   const type = props.containerType;
@@ -12,6 +13,7 @@ export const Container = ({ children, style, parentStyle, props }) => {
   } = useNode((node) => {
     return {};
   });
+
   return (
     <Resizer
       craftRef={connect}
@@ -22,21 +24,16 @@ export const Container = ({ children, style, parentStyle, props }) => {
         <>
           {[...Array(type)].map((e, i) => {
             return (
-              <Grid item key={i} xs={w as any}>
+              <Grid item key={i} xs={w as GridSize}>
                 <Element
-                  craftRef={connect}
-                  parentStyle={{}}
-                  props={{}}
-                  style={{}}
                   id={`column${i}`}
                   canvas
                   is={Resizer}
                   key={i}
+
                   custom={{
                     displayName: 'Column ' + `${i + 1}`,
-                  }}>
-                  <></>
-                </Element>
+                  }}></Element>
               </Grid>
             );
           })}

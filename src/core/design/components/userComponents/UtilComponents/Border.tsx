@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 function Border({ propKey, propName, setProp, props, styleProp }) {
   const classes = useStyles();
   const borderStylesOpts = ['Solid', 'Dotted', 'Dashed'];
-  const tmp = props[styleProp][propKey];
+  const tmp = props[styleProp]?.[propKey];
   let [width, style, color] =
     typeof tmp === 'string' ? [...tmp.split(' ')] : [];
   width = width && width !== '' ? width : '0px';
@@ -85,7 +85,7 @@ function Border({ propKey, propName, setProp, props, styleProp }) {
   );
 }
 
-export function BorderComponent({ props, setProp, styleProp }) {
+export function BorderComponent({ props, setProp, styleProp = 'style' }) {
   const classes = useStyles();
   const handleOptionChange = () => {
     let value = props[styleProp].borderTop;
@@ -103,7 +103,7 @@ export function BorderComponent({ props, setProp, styleProp }) {
     });
   };
 
-  let radius = props[styleProp].borderRadius;
+  let radius = props[styleProp]?.borderRadius;
 
   return (
     <>
@@ -187,6 +187,3 @@ export function BorderComponent({ props, setProp, styleProp }) {
     </>
   );
 }
-BorderComponent.defaultProps = {
-  styleProp: 'style',
-};

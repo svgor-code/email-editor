@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const ResizerSettings = ({ id, isParent }) => {
+export const ResizerSettings = ({ id, isParent = false }) => {
     // console.log(id);
     const {
         actions: { setProp },
@@ -62,7 +62,7 @@ export const ResizerSettings = ({ id, isParent }) => {
                 isSelfBg={true}
                 defaultImage={ContainerDefaultProps.style.backgroundImage}
             />
-            <BorderAccordion styleProp={{}} props={props} setProp={handleSetProp} />
+            <BorderAccordion props={props} setProp={handleSetProp} />
             {/* <CustomAccordion
                 title="Display"
                 children={

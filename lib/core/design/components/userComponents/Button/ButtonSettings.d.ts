@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export declare const ButtonSettings: () => React.JSX.Element;
 export declare const ButtonDefaultProps: {
     props: {

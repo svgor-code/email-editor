@@ -29,6 +29,9 @@ import { encodeJson } from './utils/encryptJson';
 
 const useStyles = makeStyles(() => ({
   root: {},
+  wrapper: {
+    borderBottom: '1px solid #0000001f',
+  },
 }));
 
 export function EmailEditor({
@@ -40,7 +43,7 @@ export function EmailEditor({
   onHtmlOpen,
   ...rest
 }) {
-  useStyles();
+  const classes = useStyles();
   const { settings } = useContext(SettingsContext);
 
   return (
@@ -62,10 +65,11 @@ export function EmailEditor({
               }}
               onRender={RenderNode}>
               <Box
+                className={classes.wrapper}
                 display="flex"
                 justifyContent="space-between"
                 alignContent="stretch"
-                position="fixed"
+                position="relative"
                 width="100%"
                 height="100%">
                 <Design onHtmlOpen={() => null} editorState={loadState} />

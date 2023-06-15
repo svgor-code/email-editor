@@ -27,7 +27,7 @@ export const TextSettings = () => {
         <div>
             <AccordionHeader title={"Spacing"} />
             <MarginAccordion props={props} setProp={setProp} />
-            <PaddingAccordion props={props} setProp={setProp} styleProp={"style"} />
+            <PaddingAccordion props={props} setProp={setProp}  />
             <AccordionHeader title={"Decoration"} />
             <BackgroundAccordion
                 props={props}
@@ -35,7 +35,7 @@ export const TextSettings = () => {
                 isSelfBg={false}
                 defaultImage={TextDefaultProps.parentStyle.backgroundImage}
             />
-            <BorderAccordion props={props} setProp={setProp} styleProp={"style"} />
+            <BorderAccordion props={props} setProp={setProp}  />
         </div>
     );
 };

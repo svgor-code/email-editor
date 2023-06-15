@@ -2,24 +2,18 @@ import React from 'react';
 export declare function PaddingAccordion({ props, setProp, styleProp }: {
     props: any;
     setProp: any;
-    styleProp: any;
+    styleProp?: string;
 }): React.JSX.Element;
-export declare namespace PaddingAccordion {
-    var defaultProps: {
-        styleProp: string;
-    };
-}
 export declare function MarginAccordion({ props, setProp, styleProp }: {
     props: any;
     setProp: any;
-    styleProp: any;
+    styleProp?: string;
 }): React.JSX.Element;
-export declare namespace MarginAccordion {
-    var defaultProps: {
-        styleProp: string;
-    };
-}
-export declare function BorderAccordion({ props, setProp, styleProp }: any): React.JSX.Element;
+export declare function BorderAccordion({ props, setProp, styleProp }: {
+    props: any;
+    setProp: any;
+    styleProp?: string;
+}): React.JSX.Element;
 export declare function SizeAccordion({ props, setProp, type }: {
     props: any;
     setProp: any;

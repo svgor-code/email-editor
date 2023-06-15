@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PaddingAccordion({ props, setProp, styleProp }) {
+export function PaddingAccordion({ props, setProp, styleProp = "parentStyle" }) {
   return (
     <CustomAccordion
       defaultExpanded={null}
@@ -52,10 +52,8 @@ export function PaddingAccordion({ props, setProp, styleProp }) {
     />
   );
 }
-PaddingAccordion.defaultProps = {
-  styleProp: 'parentStyle',
-};
-export function MarginAccordion({ props, setProp, styleProp }) {
+
+export function MarginAccordion({ props, setProp, styleProp = "parentStyle" }) {
   return (
     <CustomAccordion
       defaultExpanded={null}
@@ -80,15 +78,13 @@ export function MarginAccordion({ props, setProp, styleProp }) {
     />
   );
 }
-MarginAccordion.defaultProps = {
-  styleProp: 'parentStyle',
-};
-export function BorderAccordion({ props, setProp, styleProp }: any) {
+
+export function BorderAccordion({ props, setProp, styleProp = "style" }) {
   var borderString =
-    props[styleProp].borderRight +
-    props[styleProp].borderLeft +
-    props[styleProp].borderBottom +
-    props[styleProp].borderTop;
+    props[styleProp]?.borderRight +
+    props[styleProp]?.borderLeft +
+    props[styleProp]?.borderBottom +
+    props[styleProp]?.borderTop;
 
   var isBorderExists = borderString && borderString.split('0px').length < 5;
 

@@ -10,7 +10,7 @@ import { SvgIcon } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        position: "fixed",
+        position: "absolute",
         bottom: 22,
         top: "auto",
         left: 22,

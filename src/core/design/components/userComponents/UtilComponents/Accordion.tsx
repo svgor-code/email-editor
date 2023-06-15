@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import MuiAccordion, { AccordionProps } from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionSummary, { AccordionSummaryProps } from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 
 // @ts-ignore
@@ -25,7 +25,7 @@ export const Accordion: React.FC<AccordionProps> = withStyles({
     },
     expanded: {}
 })(MuiAccordion);
-// @ts-ignore
+
 export const AccordionSummary: any = withStyles({
     root: {
         backgroundColor: "#fafafa",

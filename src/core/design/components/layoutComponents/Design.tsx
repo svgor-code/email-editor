@@ -20,7 +20,9 @@ export default function Design({ editorState, onHtmlOpen }) {
   const bodyBackgroundImage = rootNode
     ? rootNode.data.props.style.backgroundImage
     : ContainerDefaultProps.style.backgroundColor;
-  var styleCopy = JSON.parse(JSON.stringify(ContainerDefaultProps));
+
+  const styleCopy = JSON.parse(JSON.stringify(ContainerDefaultProps));
+
   styleCopy.style.backgroundColor = '#ffffff';
   styleCopy.parentStyle.paddingTop = 10;
   styleCopy.parentStyle.paddingBottom = 10;
@@ -43,7 +45,7 @@ export default function Design({ editorState, onHtmlOpen }) {
         width: '100%',
         height: '100%',
         overflowX: 'hidden',
-        overflowY: 'scroll',
+        borderRight: '1px solid #0000001f'
       }}
       ref={(ref) => connectors.select(connectors.hover(ref, null), null)}>
       <div

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function GroupedButtons({ displayProp, handleChange, mode }: any) {
+export function GroupedButtons({ displayProp, handleChange, mode = 'float' }: any) {
   const classes = useStyles();
   const validateProp = (displayProp) => {
     if (!displayProp || displayProp === '') {
