@@ -1,6 +1,6 @@
 {
   "name": "ts-email-editor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Email Editor",
   "main": "lib/index.js",
   "scripts": {
