@@ -1,7 +1,7 @@
 {
   "name": "ts-email-editor",
-  "version": "1.0.0",
-  "description": "Email Editor",
+  "version": "1.0.1",
+  "description": "TS Email Editor",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --extendedDiagnostics",
