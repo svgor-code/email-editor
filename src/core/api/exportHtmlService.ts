@@ -4,8 +4,7 @@ class ExportHtmlService {
   generateHtml = (jsx) =>
     new Promise((resolve, reject) => {
       //check if url is present in env.
-      const url =
-        'https://ts-email-editor-server-o0iwqwz17-atrkonst-gmailcom.vercel.app/api/html';
+      const url = `${process.env.REACT_APP_TS_EMAIL_EDITOR_SSR}/api/html`;
       axios
         .post(
           url,
