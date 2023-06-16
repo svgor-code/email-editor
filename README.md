@@ -4,6 +4,7 @@ TS Email Editor is a robust, versatile, and user-friendly **React library** for 
 
 The unique feature of Custom Email Editor is its seamless integration with a server for converting JSX email structures into reusable HTML templates. This provides developers and designers with the power to create visually compelling emails with minimal effort, and ensures compatibility across various email clients.
 
+![Optional Text](example/public/email_template.png)
 
 ## Features
 
