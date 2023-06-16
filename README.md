@@ -1,8 +1,9 @@
-# Custom Email Editor
+# TS Email Editor
 
-Custom Email Editor is a powerful, versatile, and user-friendly email editor based on [ravenappdev/email-editor](https://github.com/ravenappdev/email-editor). It provides an intuitive drag-and-drop interface for creating stunning emails with ease, thanks to its underlying [Craft.js](https://craft.js.org/) framework.
+TS Email Editor is a robust, versatile, and user-friendly **React library** for building beautiful, interactive emails. Built with **TypeScript** and based on [ravenappdev/email-editor](https://github.com/ravenappdev/email-editor), it leverages the [Craft.js](https://craft.js.org/) framework to offer an intuitive drag-and-drop interface for email design.
 
-Paired with a server, Custom Email Editor transforms JSX email structure into reusable HTML templates, empowering developers and designers to create and customize beautiful emails with maximum efficiency and minimal effort.
+The unique feature of Custom Email Editor is its seamless integration with a server for converting JSX email structures into reusable HTML templates. This provides developers and designers with the power to create visually compelling emails with minimal effort, and ensures compatibility across various email clients.
+
 
 ## Features
 
