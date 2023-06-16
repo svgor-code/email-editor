@@ -26,6 +26,7 @@ import 'braft-editor/dist/index.css';
 import { createTheme } from '../../theme';
 import SettingsContext from '../../context/SettingsContext';
 import { encodeJson } from './utils/encryptJson';
+import { renderHtml } from '../repo/exportHtmlRepo';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -99,7 +100,7 @@ function EditorSaveModule({ triggerFetchState, getState, version }) {
     var html = null;
     try {
       const craftNodes = JSON.parse(json);
-      // html = await renderHtml(craftNodes);
+      html = await renderHtml(craftNodes);
     } catch (err) {
       console.log(err);
     }

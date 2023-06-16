@@ -1,4 +1,5 @@
 import lz from "lzutf8";
+
 export function encodeJson(json) {
     return lz.encodeBase64(lz.compress(json));
 }

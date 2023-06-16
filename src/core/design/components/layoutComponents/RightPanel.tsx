@@ -17,8 +17,7 @@ export function RightPanel({ ...rest }) {
   const classes = useStyles();
   const { actions, query, selected, rootNode } = useEditor((state, query) => {
     const currentNodeSet = state.events.selected;
-    console.log(state.nodes);
-    // const currentNodeId = typeof state.events.selected === 'string' ? state.events.selected : null;
+
     let selected;
     if (currentNodeSet && currentNodeSet.size > 0) {
       const currentNodeId = Array.from(currentNodeSet)[0];
@@ -45,8 +44,6 @@ export function RightPanel({ ...rest }) {
     ) : (
       <></>
     );
-
-  console.log('here', selected);
 
   return (
     <Box pb={2} mt={1}>
