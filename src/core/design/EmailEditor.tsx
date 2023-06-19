@@ -42,6 +42,7 @@ export function EmailEditor({
   getState,
   onPreviewOpen,
   onHtmlOpen,
+  editorSsrUrl,
   ...rest
 }) {
   const classes = useStyles();
@@ -81,6 +82,7 @@ export function EmailEditor({
                 triggerFetchState={triggerFetchState}
                 getState={getState}
                 version={loadVersion}
+                editorSsrUrl={editorSsrUrl}
               />
             </Editor>
           </Grid>
@@ -90,7 +92,12 @@ export function EmailEditor({
   );
 }
 
-function EditorSaveModule({ triggerFetchState, getState, version }) {
+function EditorSaveModule({
+  triggerFetchState,
+  getState,
+  version,
+  editorSsrUrl,
+}) {
   const { query } = useEditor();
 
   const fetchState = async () => {
@@ -100,7 +107,7 @@ function EditorSaveModule({ triggerFetchState, getState, version }) {
     var html = null;
     try {
       const craftNodes = JSON.parse(json);
-      html = await renderHtml(craftNodes);
+      html = await renderHtml(craftNodes, editorSsrUrl);
     } catch (err) {
       console.log(err);
     }

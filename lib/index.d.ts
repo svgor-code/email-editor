@@ -1,2 +1,10 @@
 import React from 'react';
-export declare const TSEmailEditor: () => React.JSX.Element;
+type Props = {
+    editorSsrUrl: string;
+    defaultState?: {
+        json: string;
+        version: string;
+    };
+};
+export declare const EmailEditorComponent: ({ defaultState, editorSsrUrl }: Props) => React.JSX.Element;
+export {};

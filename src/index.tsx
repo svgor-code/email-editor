@@ -1,17 +1,28 @@
 import React, { useCallback, useState } from 'react';
+
 import { SettingsProvider } from './context/SettingsContext';
 import { decodeJson } from './core/design/utils/encryptJson';
 import ViewHtmlDialog from './core/design/preview/ViewHtmlDialog';
 import ViewPreviewDialog from './core/design/preview/ViewPreviewDialog';
-import { restoreSettings } from './utils/settings';
 import { EmailEditor as Designer } from './core/design/EmailEditor';
+import { restoreSettings } from './utils/settings';
 
-function EmailEditor() {
-  const [triggerFetchState, setTriggerFetchState] = useState(false);
-  const [previewState, setPreviewState] = useState(null);
-  const [htmlState, setHtmlState] = useState(null);
-  const [state, setState] = useState(null);
+type Props = {
+  editorSsrUrl: string;
+  defaultState?: {
+    json: string;
+    version: string;
+  };
+};
+
+const settings = restoreSettings();
+
+export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
   const [mode, setMode] = useState('');
+  const [state, setState] = useState(defaultState || null);
+  const [htmlState, setHtmlState] = useState(null);
+  const [previewState, setPreviewState] = useState(null);
+  const [triggerFetchState, setTriggerFetchState] = useState(false);
 
   const parseState = useCallback((stateArg) => {
     var stateJson = null;
@@ -64,7 +75,7 @@ function EmailEditor() {
   };
 
   return (
-    <>
+    <SettingsProvider settings={settings}>
       <Designer
         loadState={state ? state['json'] : ''}
         loadVersion={state ? state['version'] : ''}
@@ -72,6 +83,7 @@ function EmailEditor() {
         getState={getState}
         onPreviewOpen={handlePreviewOpen}
         onHtmlOpen={handleHtmlOpen}
+        editorSsrUrl={editorSsrUrl}
       />
       {mode === 'preview' && (
         <ViewPreviewDialog
@@ -81,16 +93,6 @@ function EmailEditor() {
         />
       )}
       {mode === 'html' && <ViewHtmlDialog html={htmlState} onClose={onClose} />}
-    </>
-  );
-}
-
-const settings = restoreSettings();
-
-export const TSEmailEditor = () => {
-  return (
-    <SettingsProvider settings={settings}>
-      <EmailEditor />
     </SettingsProvider>
   );
 };

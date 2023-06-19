@@ -1,10 +1,10 @@
 import axios from './axios';
 
 class ExportHtmlService {
-  generateHtml = (jsx) =>
+  generateHtml = (jsx, editorSsrUrl) =>
     new Promise((resolve, reject) => {
       //check if url is present in env.
-      const url = `${process.env.REACT_APP_TS_EMAIL_EDITOR_SSR}/api/html`;
+      const url = `${editorSsrUrl}/api/html`;
       axios
         .post(
           url,
