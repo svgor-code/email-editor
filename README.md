@@ -22,26 +22,13 @@ npm install --save ts-email-editor
 yarn add ts-email-editor
 ```
 
-2. Configure
-Add an environment variable `REACT_APP_TS_EMAIL_EDITOR_SSR` to your project. This variable should point to the URL of your server responsible for server-side rendering.
-
-```bash
-REACT_APP_TS_EMAIL_EDITOR_SSR=https://your-server-url.com
-```
-
-```jsx
-const url = `${process.env.REACT_APP_TS_EMAIL_EDITOR_SSR}/api/html`;
-```
-
-The server code can be found [here](https://github.com/svgor-code/ts-email-editor-ssr).
-
-3. Import it into your project:
+2. Import it into your project:
 
 ```jsx
 import EmailEditor from 'custom-email-editor';
 ```
 
-4. Use it
+3. Use it
 
 ```jsx
 import React from 'react';
@@ -52,10 +39,12 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <TSEmailEditor />
+      <EmailEditorComponent editorSsrUrl="url of a ssr server" />
     </div>
   );
 }
 
 export default App;
 ```
+
+The server code can be found [here](https://github.com/svgor-code/ts-email-editor-ssr).
