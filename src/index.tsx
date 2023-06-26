@@ -74,6 +74,8 @@ export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
     setMode('');
   };
 
+  console.log(state?.json);
+
   return (
     <SettingsProvider settings={settings}>
       <Designer

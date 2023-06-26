@@ -4,7 +4,7 @@ class ExportHtmlService {
   generateHtml = (jsx, editorSsrUrl) =>
     new Promise((resolve, reject) => {
       //check if url is present in env.
-      const url = `${editorSsrUrl}/api/html`;
+      const url = `${editorSsrUrl}`;
       axios
         .post(
           url,
