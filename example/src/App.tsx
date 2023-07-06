@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <EmailEditorComponent editorSsrUrl="https://s52jwzm6uf.execute-api.us-east-1.amazonaws.com/dev/render" />
+      <EmailEditorComponent editorSsrUrl="https://ts-email-editor-server-atrkonst-gmailcom.vercel.app/api/html" />
     </div>
   );
 }
