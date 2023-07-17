@@ -529,6 +529,7 @@ export function MediaAccordion({ props, setProp, src, type }) {
   useEffect(() => {
     if (imagesContext.currentImgUrl) {
       setProp((props) => (props.props.src = imagesContext.currentImgUrl));
+      imagesContext.setImageUrl("");
     }
   }, [imagesContext.currentImgUrl]);
 
