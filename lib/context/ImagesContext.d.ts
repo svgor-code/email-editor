@@ -1,12 +1,12 @@
 import React from 'react';
 interface IImagesContext {
     currentImgUrl: string;
-    openImageManager: () => void;
+    openImageManager: boolean;
+    setOpenImageManager: (open: boolean) => void;
     setImageUrl: (url: string) => void;
 }
 export declare const ImagesContext: React.Context<IImagesContext>;
-export declare const ImagesProvider: ({ openImageManager, children }: {
-    openImageManager: any;
+export declare const ImagesProvider: ({ children }: {
     children: any;
 }) => React.JSX.Element;
 export {};

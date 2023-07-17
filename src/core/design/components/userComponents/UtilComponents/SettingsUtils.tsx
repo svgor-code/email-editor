@@ -554,7 +554,7 @@ export function MediaAccordion({ props, setProp, src, type }) {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={imagesContext.openImageManager}>
+                onClick={() => imagesContext.setOpenImageManager(true)}>
                 Open Images Manager
               </Button>
             </Box>
