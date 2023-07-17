@@ -527,6 +527,7 @@ export function MediaAccordion({ props, setProp, src, type }) {
   const imagesContext = useContext(ImagesContext);
 
   useEffect(() => {
+    console.log(props, imagesContext.currentImgUrl, 'debug');
     if (imagesContext.currentImgUrl) {
       setProp((props) => (props.props.src = imagesContext.currentImgUrl));
       imagesContext.setImageUrl("");
