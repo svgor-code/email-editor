@@ -1,5 +1,5 @@
 import React from 'react';
-export declare function PaddingAccordion({ props, setProp, styleProp }: {
+export declare function PaddingAccordion({ props, setProp, styleProp, }: {
     props: any;
     setProp: any;
     styleProp?: string;

@@ -6,8 +6,9 @@ import {
   Slider,
   Button as MaterialButton,
   Link,
+  Button,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { MarginComponent, PaddingComponent } from './PaddingMargin';
@@ -20,6 +21,7 @@ import { IconButton } from '@material-ui/core';
 import { Tooltip } from '@material-ui/core';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import LaunchIcon from '@material-ui/icons/Launch';
+import { ImagesContext } from '../../../../../context/ImagesContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PaddingAccordion({ props, setProp, styleProp = "parentStyle" }) {
+export function PaddingAccordion({
+  props,
+  setProp,
+  styleProp = 'parentStyle',
+}) {
   return (
     <CustomAccordion
       defaultExpanded={null}
@@ -53,7 +59,7 @@ export function PaddingAccordion({ props, setProp, styleProp = "parentStyle" }) 
   );
 }
 
-export function MarginAccordion({ props, setProp, styleProp = "parentStyle" }) {
+export function MarginAccordion({ props, setProp, styleProp = 'parentStyle' }) {
   return (
     <CustomAccordion
       defaultExpanded={null}
@@ -79,7 +85,7 @@ export function MarginAccordion({ props, setProp, styleProp = "parentStyle" }) {
   );
 }
 
-export function BorderAccordion({ props, setProp, styleProp = "style" }) {
+export function BorderAccordion({ props, setProp, styleProp = 'style' }) {
   var borderString =
     props[styleProp]?.borderRight +
     props[styleProp]?.borderLeft +
@@ -518,6 +524,14 @@ export function ColorAccordion({ props, setProp, types }) {
 }
 
 export function MediaAccordion({ props, setProp, src, type }) {
+  const imagesContext = useContext(ImagesContext);
+
+  useEffect(() => {
+    if (imagesContext.currentImgUrl) {
+      setProp((props) => (props.props.src = imagesContext.currentImgUrl));
+    }
+  }, [imagesContext.currentImgUrl]);
+
   return (
     <CustomAccordion
       defaultExpanded={null}
@@ -535,6 +549,17 @@ export function MediaAccordion({ props, setProp, src, type }) {
       }
       children={
         <>
+          {imagesContext && (
+            <Box m={1}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={imagesContext.openImageManager}>
+                Open Images Manager
+              </Button>
+            </Box>
+          )}
+
           <Box m={1}>
             <Typography variant="subtitle2" color="textSecondary">
               Media URL

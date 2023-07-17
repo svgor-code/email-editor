@@ -7,6 +7,7 @@ import ViewPreviewDialog from './core/design/preview/ViewPreviewDialog';
 import { EmailEditor as Designer } from './core/design/EmailEditor';
 import { restoreSettings } from './utils/settings';
 
+
 type Props = {
   editorSsrUrl: string;
   defaultState?: {
@@ -98,3 +99,5 @@ export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
     </SettingsProvider>
   );
 };
+
+export { ImagesProvider } from './context/ImagesContext';

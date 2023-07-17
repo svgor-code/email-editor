@@ -7,4 +7,4 @@ type Props = {
     };
 };
 export declare const EmailEditorComponent: ({ defaultState, editorSsrUrl }: Props) => React.JSX.Element;
-export {};
+export { ImagesProvider } from './context/ImagesContext';
