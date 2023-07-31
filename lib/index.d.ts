@@ -1,10 +1,6 @@
 import React from 'react';
 type Props = {
     editorSsrUrl: string;
-    defaultState?: {
-        json: string;
-        version: string;
-    };
 };
-export declare const EmailEditorComponent: ({ defaultState, editorSsrUrl }: Props) => React.JSX.Element;
-export { ImagesProvider } from './context/ImagesContext';
+export declare const EmailEditorComponent: ({ editorSsrUrl }: Props) => React.JSX.Element;
+export { AppContextProvider } from './context/AppContext';

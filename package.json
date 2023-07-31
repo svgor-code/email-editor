@@ -1,6 +1,6 @@
 {
   "name": "ts-email-editor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Email Editor for React with SSR",
   "keywords": ["React", "TypeScript", "Email", "Editor", "Email Editor"],
   "main": "lib/index.js",
