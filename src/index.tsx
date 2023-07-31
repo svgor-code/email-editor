@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import { SettingsProvider } from './context/SettingsContext';
 import { decodeJson } from './core/design/utils/encryptJson';
@@ -6,45 +6,46 @@ import ViewHtmlDialog from './core/design/preview/ViewHtmlDialog';
 import ViewPreviewDialog from './core/design/preview/ViewPreviewDialog';
 import { EmailEditor as Designer } from './core/design/EmailEditor';
 import { restoreSettings } from './utils/settings';
+import AppContext from './context/AppContext';
 
 
 type Props = {
   editorSsrUrl: string;
-  defaultState?: {
-    json: string;
-    version: string;
-  };
 };
 
 const settings = restoreSettings();
 
-export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
+export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
   const [mode, setMode] = useState('');
-  const [state, setState] = useState(defaultState || null);
+
+  const appContext = useContext(AppContext);
+
   const [htmlState, setHtmlState] = useState(null);
   const [previewState, setPreviewState] = useState(null);
   const [triggerFetchState, setTriggerFetchState] = useState(false);
 
   const parseState = useCallback((stateArg) => {
-    var stateJson = null;
-    var stateVersion = '';
+    let stateJson = null;
+    let stateVersion = '';
+
     try {
       if (stateArg) {
         const stateVal = decodeJson(stateArg);
         if (stateVal) {
-          var tmp = JSON.parse(stateVal);
+          let tmp = JSON.parse(stateVal);
           stateJson = tmp['json'];
           stateVersion = tmp['version'];
         }
       }
     } catch (err) {
       const error = new Error(`Invalid Editor State.\n${err.message}`);
+
       error.stack = err.stack;
-      console.log(error);
+
       return null;
     }
 
-    setState({ json: stateJson, version: stateVersion });
+    appContext.setEditorState({ json: stateJson, version: stateVersion });
   }, []);
 
   const getState = useCallback(
@@ -75,13 +76,11 @@ export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
     setMode('');
   };
 
-  console.log(state?.json);
-
   return (
     <SettingsProvider settings={settings}>
       <Designer
-        loadState={state ? state['json'] : ''}
-        loadVersion={state ? state['version'] : ''}
+        loadState={appContext.editorState ? appContext.editorState['json'] : ''}
+        loadVersion={appContext.editorState ? appContext.editorState['version'] : ''}
         triggerFetchState={triggerFetchState}
         getState={getState}
         onPreviewOpen={handlePreviewOpen}
@@ -100,4 +99,4 @@ export const EmailEditorComponent = ({ defaultState, editorSsrUrl }: Props) => {
   );
 };
 
-export { ImagesProvider } from './context/ImagesContext';
+export { AppContextProvider } from './context/AppContext';

@@ -1,38 +1,40 @@
-import React, { createContext, useState } from 'react';
-
-declare global {
-  interface Window {
-    __editorState: any;
-    __version: string;
-  }
-}
+import React, { ReactNode, createContext, useState } from "react";
+import { ImagesProvider } from "./ImagesContext";
 
 interface IAppContext {
-  editorState: undefined;
+  editorState: string | null;
   setEditorState: React.Dispatch<any>;
   version: string | number;
   setVersion: React.Dispatch<string>;
 }
 
 const defaultValue: IAppContext = {
-  editorState: undefined,
+  editorState: null,
   setEditorState: () => null,
-  version: '0',
+  version: "0",
   setVersion: () => null,
 };
 
 const AppContext = createContext<IAppContext>(defaultValue);
-const editorStateArg = window.__editorState || {};
-const versionArg = window.__version || '';
 
-const AppContextProvider = ({ children }) => {
-  const [editorState, setEditorState] = useState(editorStateArg);
-  const [version, setVersion] = useState(versionArg);
+const AppContextProvider = ({
+  defaultState,
+  children,
+}: {
+  defaultState?: {
+    json: string;
+    version: string;
+  };
+  children: ReactNode;
+}) => {
+  const [version, setVersion] = useState(defaultState.version || "");
+  const [editorState, setEditorState] = useState(defaultState.json || null);
 
   return (
     <AppContext.Provider
-      value={{ editorState, setEditorState, version, setVersion }}>
-      {children}
+      value={{ editorState, setEditorState, version, setVersion }}
+    >
+      <ImagesProvider>{children}</ImagesProvider>
     </AppContext.Provider>
   );
 };
