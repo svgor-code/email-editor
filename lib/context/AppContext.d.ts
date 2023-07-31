@@ -1,9 +1,14 @@
 import React, { ReactNode } from "react";
-interface IAppContext {
-    editorState: string | null;
-    setEditorState: React.Dispatch<any>;
+export interface IAppContext {
     version: string | number;
+    triggerFetchState: boolean;
+    editorState: string | null;
+    renderEditorState: boolean;
+    setEditorState: React.Dispatch<any>;
     setVersion: React.Dispatch<string>;
+    getCurrentEditorState: () => string;
+    setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
+    setRenderEditorState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 declare const AppContext: React.Context<IAppContext>;
 declare const AppContextProvider: ({ defaultState, children, }: {

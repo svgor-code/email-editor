@@ -1,13 +1,12 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from "react";
 
-import { SettingsProvider } from './context/SettingsContext';
-import { decodeJson } from './core/design/utils/encryptJson';
-import ViewHtmlDialog from './core/design/preview/ViewHtmlDialog';
-import ViewPreviewDialog from './core/design/preview/ViewPreviewDialog';
-import { EmailEditor as Designer } from './core/design/EmailEditor';
-import { restoreSettings } from './utils/settings';
-import AppContext from './context/AppContext';
-
+import { SettingsProvider } from "./context/SettingsContext";
+import { decodeJson } from "./core/design/utils/encryptJson";
+import ViewHtmlDialog from "./core/design/preview/ViewHtmlDialog";
+import ViewPreviewDialog from "./core/design/preview/ViewPreviewDialog";
+import { EmailEditor as Designer } from "./core/design/EmailEditor";
+import { restoreSettings } from "./utils/settings";
+import AppContext from "./context/AppContext";
 
 type Props = {
   editorSsrUrl: string;
@@ -16,25 +15,30 @@ type Props = {
 const settings = restoreSettings();
 
 export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState("");
 
-  const appContext = useContext(AppContext);
+  const {
+    editorState,
+    triggerFetchState,
+    setEditorState,
+    setTriggerFetchState,
+    setRenderEditorState,
+  } = useContext(AppContext);
 
   const [htmlState, setHtmlState] = useState(null);
   const [previewState, setPreviewState] = useState(null);
-  const [triggerFetchState, setTriggerFetchState] = useState(false);
 
   const parseState = useCallback((stateArg) => {
     let stateJson = null;
-    let stateVersion = '';
+    let stateVersion = "";
 
     try {
       if (stateArg) {
         const stateVal = decodeJson(stateArg);
         if (stateVal) {
           let tmp = JSON.parse(stateVal);
-          stateJson = tmp['json'];
-          stateVersion = tmp['version'];
+          stateJson = tmp["json"];
+          stateVersion = tmp["version"];
         }
       }
     } catch (err) {
@@ -45,14 +49,14 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
       return null;
     }
 
-    appContext.setEditorState({ json: stateJson, version: stateVersion });
+    setEditorState({ json: stateJson, version: stateVersion });
   }, []);
 
   const getState = useCallback(
     (obj) => {
-      if (mode === 'preview') {
+      if (mode === "preview") {
         setPreviewState(obj.html);
-      } else if (mode === 'html') {
+      } else if (mode === "html") {
         setHtmlState(obj.html);
       }
 
@@ -63,40 +67,46 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
   );
 
   const handlePreviewOpen = useCallback(() => {
-    setMode('preview');
+    setMode("preview");
     setTriggerFetchState(true);
+    setRenderEditorState(true);
   }, []);
 
   const handleHtmlOpen = useCallback(() => {
-    setMode('html');
+    setMode("html");
     setTriggerFetchState(true);
+    setRenderEditorState(true);
   }, []);
 
   const onClose = () => {
-    setMode('');
+    setMode("");
   };
 
   return (
     <SettingsProvider settings={settings}>
       <Designer
-        loadState={appContext.editorState ? appContext.editorState['json'] : ''}
-        loadVersion={appContext.editorState ? appContext.editorState['version'] : ''}
+        loadState={editorState ? editorState["json"] : ""}
+        loadVersion={editorState ? editorState["version"] : ""}
         triggerFetchState={triggerFetchState}
         getState={getState}
         onPreviewOpen={handlePreviewOpen}
         onHtmlOpen={handleHtmlOpen}
         editorSsrUrl={editorSsrUrl}
       />
-      {mode === 'preview' && (
+      {mode === "preview" && (
         <ViewPreviewDialog
           previewDoc={previewState}
           onClose={onClose}
           title="Preview"
         />
       )}
-      {mode === 'html' && <ViewHtmlDialog html={htmlState} onClose={onClose} />}
+      {mode === "html" && <ViewHtmlDialog html={htmlState} onClose={onClose} />}
     </SettingsProvider>
   );
 };
 
-export { AppContextProvider } from './context/AppContext';
+export {
+  AppContextProvider,
+  AppContext,
+  IAppContext,
+} from "./context/AppContext";

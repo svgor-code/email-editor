@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 type Props = {
     editorSsrUrl: string;
 };
 export declare const EmailEditorComponent: ({ editorSsrUrl }: Props) => React.JSX.Element;
-export { AppContextProvider } from './context/AppContext';
+export { AppContextProvider, AppContext, IAppContext, } from "./context/AppContext";
