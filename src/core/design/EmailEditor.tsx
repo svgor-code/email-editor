@@ -87,7 +87,6 @@ function EditorSaveModule({
   editorSsrUrl,
 }) {
   const { query } = useEditor();
-  const { renderEditorState } = useContext(AppContext);
 
   const fetchState = async () => {
     const json = query.serialize();
@@ -95,13 +94,11 @@ function EditorSaveModule({
 
     let html = null;
 
-    if (renderEditorState) {
-      try {
-        const craftNodes = JSON.parse(json);
-        html = await renderHtml(craftNodes, editorSsrUrl);
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      const craftNodes = JSON.parse(json);
+      html = await renderHtml(craftNodes, editorSsrUrl);
+    } catch (err) {
+      console.log(err);
     }
 
     getState({

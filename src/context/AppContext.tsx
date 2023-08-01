@@ -13,79 +13,80 @@ import {
   Resizer,
   BodyWrapper,
 } from "../core/design/components/userComponents";
-import { encodeJson } from "../core/design/utils/encryptJson";
+import { decodeJson, encodeJson } from "../core/design/utils/encryptJson";
 import { RenderNode } from "../core/design/utils/RenderNode";
 
+type Props = {
+  defaultState?: {
+    json: string;
+    version: string;
+  };
+  children: ReactNode;
+};
+
 export interface IAppContext {
-  version: string | number;
+  encodedState: string;
   triggerFetchState: boolean;
-  editorState: string | null;
-  renderEditorState: boolean;
-  setEditorState: React.Dispatch<any>;
-  setVersion: React.Dispatch<string>;
-  getCurrentEditorState: () => string;
+  editorState: { json: string; version: string } | null;
+  setEditorState: React.Dispatch<{ json: string; version: string } | null>;
   setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
-  setRenderEditorState: React.Dispatch<React.SetStateAction<boolean>>;
+  setEncoded: (state: string) => void;
 }
 
 const defaultValue: IAppContext = {
-  version: "0",
   editorState: null,
+  encodedState: "",
   triggerFetchState: false,
-  renderEditorState: false,
-  setEditorState: () => null,
+  setEncoded: () => {
+    throw new Error("Not in the context");
+  },
+  setEditorState: () => {
+    throw new Error("Not in the context");
+  },
   setTriggerFetchState: () => {
-    throw new Error("Not in the context");
-  },
-  setVersion: () => null,
-  getCurrentEditorState: () => {
-    throw new Error("Not in the context");
-  },
-  setRenderEditorState: () => {
     throw new Error("Not in the context");
   },
 };
 
 const AppContext = createContext<IAppContext>(defaultValue);
 
-const AppContextProvider = ({
-  defaultState,
-  children,
-}: {
-  defaultState?: {
+const AppContextProvider = ({ defaultState, children }: Props) => {
+  const [editorState, setEditorState] = useState<{
     json: string;
     version: string;
-  };
-  children: ReactNode;
-}) => {
-  // const { query } = useEditor();
+  } | null>(defaultState || null);
   const [triggerFetchState, setTriggerFetchState] = useState(false);
-  const [version, setVersion] = useState(defaultState.version || "");
-  const [editorState, setEditorState] = useState(defaultState.json || null);
-  const [renderEditorState, setRenderEditorState] = useState(false);
+  const [encodedState, setEncodedState] = useState<string>("");
 
-  const getCurrentEditorState = () => { return "" };
-
-  const getCurrentEditor = (
-    query: QueryCallbacksFor<typeof QueryMethods>
-  ) => {
+  const getCurrentEditor = (query: QueryCallbacksFor<typeof QueryMethods>) => {
     const json = query.serialize();
-    
-    setEditorState(json);
+
+    const newState = { json: json, version: editorState?.version || "" };
+    const newEncodedState = encodeJson(JSON.stringify(newState));
+
+    setEncodedState(newEncodedState);
+    setEditorState(newState);
+  };
+
+  const setEncoded = (state: string) => {
+    const newDecodedState = decodeJson(state);
+
+    if (newDecodedState) {
+      const parsedState = JSON.parse(newDecodedState);
+
+      setEditorState({ ...parsedState });
+    }
   };
 
   return (
     <AppContext.Provider
       value={{
-        version,
         editorState,
-        renderEditorState,
+        encodedState,
         triggerFetchState,
+        setEncoded,
         setEditorState,
-        setVersion,
-        getCurrentEditorState,
         setTriggerFetchState,
-        setRenderEditorState,
       }}
     >
       <Editor

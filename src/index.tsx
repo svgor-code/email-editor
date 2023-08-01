@@ -22,7 +22,6 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
     triggerFetchState,
     setEditorState,
     setTriggerFetchState,
-    setRenderEditorState,
   } = useContext(AppContext);
 
   const [htmlState, setHtmlState] = useState(null);
@@ -69,13 +68,11 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
   const handlePreviewOpen = useCallback(() => {
     setMode("preview");
     setTriggerFetchState(true);
-    setRenderEditorState(true);
   }, []);
 
   const handleHtmlOpen = useCallback(() => {
     setMode("html");
     setTriggerFetchState(true);
-    setRenderEditorState(true);
   }, []);
 
   const onClose = () => {
