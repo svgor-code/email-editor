@@ -12,6 +12,7 @@ import {
   CustomDivider,
   Resizer,
   BodyWrapper,
+  Snippet,
 } from "../core/design/components/userComponents";
 import { decodeJson, encodeJson } from "../core/design/utils/encryptJson";
 import { RenderNode } from "../core/design/utils/RenderNode";
@@ -103,6 +104,7 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
           CustomDivider,
           Resizer,
           BodyWrapper,
+          Snippet,
         }}
         onRender={RenderNode}
       >

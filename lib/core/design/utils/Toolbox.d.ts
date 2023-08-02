@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 export declare function Toolbox({ anchorEl, onClick, origin, onClose }: {
     anchorEl: any;
     onClick: any;

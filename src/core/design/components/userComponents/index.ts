@@ -6,5 +6,5 @@ export * from "./Image/Image";
 export * from "./Text/Text";
 export * from "./BodyWrapper/BodyWrapper";
 export * from "./Video/Video";
-
+export * from "./Snippet/Snippet";
 export * from "./Divider/Divider";

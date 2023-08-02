@@ -1,7 +1,6 @@
 import { useNode } from "@craftjs/core";
-
 import { Box, Divider, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { DividerDefaultProps, DividerSettings } from "./DividerSettings";
 
@@ -10,6 +9,10 @@ export function CustomDivider({ style, parentStyle, ...rest }) {
         connectors: { connect, drag },
         id
     } = useNode();
+
+    useEffect(() => {
+        console.log('werwr')
+    }, []);
 
     //bgimage/bgcolor
     var parentStyleCopy = {

@@ -1,18 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Editor, useEditor } from "@craftjs/core";
 import { Footer, RightPanel } from "./components/layoutComponents";
-import {
-  Button,
-  Container,
-  Text,
-  Image,
-  Video,
-  HtmlBox,
-  CustomDivider,
-  Resizer,
-  BodyWrapper,
-} from "./components/userComponents";
-import { RenderNode } from "./utils/RenderNode";
 import { Box, Grid } from "@material-ui/core";
 import Design from "./components/layoutComponents/Design";
 import { makeStyles, StylesProvider, ThemeProvider } from "@material-ui/core";

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Element } from '@craftjs/core';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Element } from "@craftjs/core";
+import PropTypes from "prop-types";
 import {
   Button,
   Container,
@@ -9,16 +9,17 @@ import {
   Video,
   HtmlBox,
   CustomDivider,
-} from '../components/userComponents';
-import { IconButton, makeStyles, Tooltip, Popover } from '@material-ui/core';
-import { Box } from '@material-ui/core';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import CodeIcon from '@material-ui/icons/Code';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import Crop75Icon from '@material-ui/icons/Crop75';
-import ViewWeekIcon from '@material-ui/icons/ViewWeek';
-import RemoveIcon from '@material-ui/icons/Remove';
+  Snippet,
+} from "../components/userComponents";
+import { IconButton, makeStyles, Tooltip, Popover } from "@material-ui/core";
+import { Box } from "@material-ui/core";
+import TextFieldsIcon from "@material-ui/icons/TextFields";
+import ImageIcon from "@material-ui/icons/Image";
+import CodeIcon from "@material-ui/icons/Code";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import Crop75Icon from "@material-ui/icons/Crop75";
+import ViewWeekIcon from "@material-ui/icons/ViewWeek";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -32,16 +33,17 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
-    border: 'none',
+    border: "none",
   },
   fallbackTypography: {
     padding: theme.spacing(1),
   },
 }));
+
 export function Toolbox({ anchorEl, onClick, origin, onClose }) {
   const classes = useStyles();
   //   console.log(anchorEl);
-  const isDown = origin !== 'top';
+  const isDown = origin !== "top";
   return (
     <Popover
       open={Boolean(anchorEl)}
@@ -55,19 +57,21 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
       // onClose={() => handleClose(index)}
       anchorOrigin={{
         vertical: origin,
-        horizontal: 'center',
+        horizontal: "center",
       }}
       transformOrigin={{
-        vertical: origin === 'top' ? 'bottom' : 'top',
-        horizontal: 'center',
-      }}>
+        vertical: origin === "top" ? "bottom" : "top",
+        horizontal: "center",
+      }}
+    >
       <Box display="flex">
         {/* <Box mt={1} /> */}
         <Tooltip arrow title="Text" aria-label="text" placement={origin}>
           <IconButton
             onClick={() => {
               onClick({ newNode: Text, isDown: isDown });
-            }}>
+            }}
+          >
             <TextFieldsIcon />
           </IconButton>
         </Tooltip>
@@ -76,16 +80,18 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
           <IconButton
             onClick={() => {
               onClick({ newNode: Button, isDown: isDown });
-            }}>
+            }}
+          >
             <Crop75Icon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> 
         <Box mr={1} />
         <Tooltip arrow title="Image" aria-label="image" placement={origin}>
           <IconButton
             onClick={() => {
               onClick({ newNode: Image, isDown: isDown });
-            }}>
+            }}
+          >
             <ImageIcon />
           </IconButton>
         </Tooltip>
@@ -94,7 +100,8 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
           <IconButton
             onClick={() => {
               onClick({ newNode: Video, isDown: isDown });
-            }}>
+            }}
+          >
             <YouTubeIcon />
           </IconButton>
         </Tooltip>
@@ -103,11 +110,13 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
           arrow
           title="Columns"
           aria-label="container"
-          placement={origin}>
+          placement={origin}
+        >
           <IconButton
             onClick={() => {
               onClick({ newNode: Container, isDown: isDown, isCanvas: true });
-            }}>
+            }}
+          >
             <ViewWeekIcon />
           </IconButton>
         </Tooltip>
@@ -116,7 +125,8 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
           <IconButton
             onClick={() => {
               onClick({ newNode: CustomDivider, isDown: isDown });
-            }}>
+            }}
+          >
             <RemoveIcon />
           </IconButton>
         </Tooltip>
@@ -125,7 +135,17 @@ export function Toolbox({ anchorEl, onClick, origin, onClose }) {
           <IconButton
             onClick={() => {
               onClick({ newNode: HtmlBox, isDown: isDown });
-            }}>
+            }}
+          >
+            <CodeIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip arrow title="Snippet" aria-label="snippet" placement={origin}>
+          <IconButton
+            onClick={() => {
+              onClick({ newNode: Snippet, isDown: isDown });
+            }}
+          >
             <CodeIcon />
           </IconButton>
         </Tooltip>
