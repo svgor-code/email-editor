@@ -1,9 +1,10 @@
-import React from 'react';
-export declare function Snippet({ props, parentStyle, style, ...rest }: {
+import React from "react";
+export declare function Snippet({ props, parentStyle, style, children, ...rest }: {
     [x: string]: any;
     props: any;
     parentStyle: any;
     style: any;
+    children: any;
 }): React.JSX.Element;
 export declare namespace Snippet {
     var craft: {

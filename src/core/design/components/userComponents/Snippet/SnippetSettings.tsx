@@ -1,18 +1,21 @@
-import { useNode } from '@craftjs/core';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { unescapeHTML } from '../../../utils/unescapeHtml';
+import { useNode } from "@craftjs/core";
+import React, { useContext, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { unescapeHTML } from "../../../utils/unescapeHtml";
 import {
   AccordionHeader,
   MarginAccordion,
   PaddingAccordion,
-} from '../UtilComponents/SettingsUtils';
-import Editor from '../../../../components/AceEditor';
-import { CustomAccordion } from '../UtilComponents/Accordion';
-import { MARGIN, PADDING } from '../Defaults';
+} from "../UtilComponents/SettingsUtils";
+import Editor from "../../../../components/AceEditor";
+import { CustomAccordion } from "../UtilComponents/Accordion";
+import { MARGIN, PADDING } from "../Defaults";
+import { Box, Button } from "@material-ui/core";
+import { SnippetContext } from "../../../../../context/SnippetContext";
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -30,8 +33,9 @@ export const SnippetSettings = () => {
   } = useNode((node) => ({
     props: node.data.props,
   }));
-  const classes = useStyles();
   const [html, setHtml] = React.useState(unescapeHTML(props.props.html));
+  const { setOpenSnippetManager } = useContext(SnippetContext);
+
   const handleHtmlChange = (value) => {
     if (isHtmlPaste) {
       isHtmlPaste = false;
@@ -46,7 +50,16 @@ export const SnippetSettings = () => {
 
   return (
     <div>
-      <AccordionHeader title={'Basic'} />
+      <Box m={1}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setOpenSnippetManager(true)}
+        >
+          Open Snippets List
+        </Button>
+      </Box>
+      <AccordionHeader title={"Basic"} />
       <CustomAccordion
         defaultExpanded={null}
         title="HTML"
@@ -60,10 +73,11 @@ export const SnippetSettings = () => {
               isHtmlPaste = true;
             }}
             value={html}
-            disableSyntaxCheck={true}></Editor>
+            disableSyntaxCheck={true}
+          ></Editor>
         }
       />
-      <AccordionHeader title={'Spacing'} />
+      <AccordionHeader title={"Spacing"} />
       <MarginAccordion props={props} setProp={setProp} />
       <PaddingAccordion props={props} setProp={setProp} />
     </div>
@@ -72,7 +86,7 @@ export const SnippetSettings = () => {
 
 export const SnippetDefaultProps = {
   props: {
-    html: '<h4>Hello, world!</h4>',
+    html: "<h4>Hello, world!</h4>",
   },
   parentStyle: {
     ...PADDING,
@@ -80,7 +94,7 @@ export const SnippetDefaultProps = {
     // overflowWrap: "break-word"
   },
   options: {
-    paddingOptions: 'less',
-    marginOptions: 'less',
+    paddingOptions: "less",
+    marginOptions: "less",
   },
 };

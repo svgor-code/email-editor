@@ -54,6 +54,8 @@ export const renderNodeUtils = ({
         data: { type: newNode, isCanvas: Boolean(isCanvas) },
       }).toNode();
 
+      console.log('add node', tmp);
+
       actions.add(tmp, trg, index + isDown);
     },
 

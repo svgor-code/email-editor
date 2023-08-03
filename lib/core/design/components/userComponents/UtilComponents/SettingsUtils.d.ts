@@ -41,9 +41,10 @@ export declare function ColorAccordion({ props, setProp, types }: {
     setProp: any;
     types: any;
 }): React.JSX.Element;
-export declare function MediaAccordion({ props, setProp, src, type }: {
+export declare function MediaAccordion({ props, setProp, src, type, isImage }: {
     props: any;
     setProp: any;
     src: any;
     type: any;
+    isImage?: boolean;
 }): React.JSX.Element;

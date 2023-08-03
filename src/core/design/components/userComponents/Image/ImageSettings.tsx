@@ -41,6 +41,7 @@ export const ImageSettings = () => {
                 setProp={setProp}
                 src={ImageDefaultProps.props.src}
                 type={"image"}
+                isImage
             />
             <ActionAccordion props={props} setProp={setProp} />
             <AccordionHeader title={"Size"} />

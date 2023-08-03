@@ -16,6 +16,7 @@ import {
 } from "../core/design/components/userComponents";
 import { decodeJson, encodeJson } from "../core/design/utils/encryptJson";
 import { RenderNode } from "../core/design/utils/RenderNode";
+import { SnippetProvider } from "./SnippetContext";
 
 type Props = {
   defaultState?: {
@@ -33,6 +34,19 @@ export interface IAppContext {
   setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
   setEncoded: (state: string) => void;
 }
+
+export const resolver = {
+  Button,
+  Container,
+  Text,
+  Image,
+  Video,
+  HtmlBox,
+  CustomDivider,
+  Resizer,
+  BodyWrapper,
+  Snippet,
+};
 
 const defaultValue: IAppContext = {
   editorState: null,
@@ -108,7 +122,9 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
         }}
         onRender={RenderNode}
       >
-        <ImagesProvider>{children}</ImagesProvider>
+        <ImagesProvider>
+          <SnippetProvider>{children}</SnippetProvider>
+        </ImagesProvider>
       </Editor>
     </AppContext.Provider>
   );

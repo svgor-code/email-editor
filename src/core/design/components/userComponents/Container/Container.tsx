@@ -6,6 +6,7 @@ import { ContainerDefaultProps, ContainerSettings } from './ContainerSettings';
 import { Grid, GridSize } from '@material-ui/core';
 
 export const Container = ({ children, style, parentStyle, props }) => {
+  console.log(props, '123123123123');
   const type = props.containerType;
   const w = 12 / type;
   const {
@@ -30,7 +31,6 @@ export const Container = ({ children, style, parentStyle, props }) => {
                   canvas
                   is={Resizer}
                   key={i}
-
                   custom={{
                     displayName: 'Column ' + `${i + 1}`,
                   }}></Element>

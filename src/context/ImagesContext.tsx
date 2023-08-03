@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-interface IImagesContext {
+export interface IImagesContext {
   currentImgUrl: string;
   openImageManager: boolean;
   setOpenImageManager: (open: boolean) => void;

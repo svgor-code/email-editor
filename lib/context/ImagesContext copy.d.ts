@@ -1,5 +1,5 @@
 import React from 'react';
-export interface IImagesContext {
+interface IImagesContext {
     currentImgUrl: string;
     openImageManager: boolean;
     setOpenImageManager: (open: boolean) => void;
@@ -9,3 +9,4 @@ export declare const ImagesContext: React.Context<IImagesContext>;
 export declare const ImagesProvider: ({ children }: {
     children: any;
 }) => React.JSX.Element;
+export {};

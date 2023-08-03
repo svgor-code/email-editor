@@ -107,3 +107,7 @@ export {
   AppContext,
   IAppContext,
 } from "./context/AppContext";
+
+export { ImagesContext, IImagesContext } from "./context/ImagesContext";
+
+export { SnippetContext, ISnippetContext } from "./context/SnippetContext";

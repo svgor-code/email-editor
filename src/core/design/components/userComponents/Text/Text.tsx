@@ -56,6 +56,8 @@ export function Text({ props, style, parentStyle }) {
     const classes = useStyles();
     const theme = useTheme();
 
+    console.log(props, '444444444444')
+
     const {
         connectors: { connect, drag },
         actions: { setProp },

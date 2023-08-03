@@ -523,12 +523,11 @@ export function ColorAccordion({ props, setProp, types }) {
   );
 }
 
-export function MediaAccordion({ props, setProp, src, type }) {
+export function MediaAccordion({ props, setProp, src, type, isImage = false }) {
   const imagesContext = useContext(ImagesContext);
 
   useEffect(() => {
-    console.log(props, imagesContext.currentImgUrl, 'debug');
-    if (imagesContext.currentImgUrl) {
+    if (imagesContext.currentImgUrl && isImage) {
       setProp((props) => (props.props.src = imagesContext.currentImgUrl));
       imagesContext.setImageUrl("");
     }
@@ -551,7 +550,7 @@ export function MediaAccordion({ props, setProp, src, type }) {
       }
       children={
         <>
-          {imagesContext && (
+          {(imagesContext && isImage) && (
             <Box m={1}>
               <Button
                 variant="contained"

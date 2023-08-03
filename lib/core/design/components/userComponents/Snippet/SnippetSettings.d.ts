@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 export declare const SnippetSettings: () => React.JSX.Element;
 export declare const SnippetDefaultProps: {
     props: {
