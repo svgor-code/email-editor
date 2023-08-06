@@ -1,1 +1,0 @@
-{"version":3,"file":"useIsMountedRef.js","sourceRoot":"","sources":["../../src/hooks/useIsMountedRef.tsx"],"names":[],"mappings":";;AAAA,iCAA0C;AAE1C,SAAwB,eAAe;IACrC,MAAM,SAAS,GAAG,IAAA,cAAM,EAAC,IAAI,CAAC,CAAC;IAE/B,IAAA,iBAAS,EACP,GAAG,EAAE,CAAC,GAAG,EAAE;QACT,SAAS,CAAC,OAAO,GAAG,KAAK,CAAC;IAC5B,CAAC,EACD,EAAE,CACH,CAAC;IAEF,OAAO,SAAS,CAAC;AACnB,CAAC;AAXD,kCAWC"}
