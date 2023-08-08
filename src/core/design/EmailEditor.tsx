@@ -38,13 +38,13 @@ export function EmailEditor({
   const { settings } = useContext(SettingsContext);
 
   const generateClassName = createGenerateClassName({
-    productionPrefix: 'emailEditor',
     disableGlobal: true,
+    seed: "emailEditor"
   });
 
   return (
-    <ThemeProvider theme={createTheme(settings)}>
-      <StylesProvider injectFirst generateClassName={generateClassName}>
+    <StylesProvider generateClassName={generateClassName}>
+      <ThemeProvider theme={createTheme(settings)}>
         <Grid container justifyContent="center" alignContent="center">
           <Grid item xs={12}>
             <Box
@@ -68,8 +68,8 @@ export function EmailEditor({
             />
           </Grid>
         </Grid>
-      </StylesProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </StylesProvider>
   );
 }
 
