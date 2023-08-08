@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const HtmlBoxSettings: () => JSX.Element;
 export declare const HtmlBoxDefaultProps: {
     props: {

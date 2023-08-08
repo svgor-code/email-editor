@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const Container: {
     ({ children, style, parentStyle, props }: {
         children: any;

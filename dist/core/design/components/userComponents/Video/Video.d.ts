@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const Video: {
     ({ props, style, parentStyle, ...rest }: {
         [x: string]: any;

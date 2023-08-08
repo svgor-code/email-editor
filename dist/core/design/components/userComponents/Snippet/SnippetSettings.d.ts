@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const SnippetSettings: () => JSX.Element;
 export declare const SnippetDefaultProps: {
     props: {

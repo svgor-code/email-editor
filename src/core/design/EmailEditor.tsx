@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Editor, useEditor } from "@craftjs/core";
 import { Footer, RightPanel } from "./components/layoutComponents";
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, createGenerateClassName } from "@material-ui/core";
 import Design from "./components/layoutComponents/Design";
 import { makeStyles, StylesProvider, ThemeProvider } from "@material-ui/core";
 import "react-app-polyfill/ie11";
@@ -37,9 +37,14 @@ export function EmailEditor({
   const classes = useStyles();
   const { settings } = useContext(SettingsContext);
 
+  const generateClassName = createGenerateClassName({
+    productionPrefix: 'emailEditor',
+    disableGlobal: true,
+  });
+
   return (
     <ThemeProvider theme={createTheme(settings)}>
-      <StylesProvider>
+      <StylesProvider injectFirst generateClassName={generateClassName}>
         <Grid container justifyContent="center" alignContent="center">
           <Grid item xs={12}>
             <Box

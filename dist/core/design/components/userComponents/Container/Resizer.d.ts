@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const Resizer: {
     ({ children, style, parentStyle, props, craftRef }: {
         children: any;

@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const Button: {
     ({ props, parentStyle, style, ...rest }: {
         [x: string]: any;

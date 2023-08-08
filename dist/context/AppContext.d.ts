@@ -20,6 +20,8 @@ export interface IAppContext {
     } | null>;
     setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
     setEncoded: (state: string) => void;
+    getRenderedHtml: () => Promise<string>;
+    setUrlForRender: React.Dispatch<React.SetStateAction<string>>;
 }
 export declare const resolver: {
     Button: {

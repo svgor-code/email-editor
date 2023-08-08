@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const VideoSettings: () => JSX.Element;
 export declare const VideoDefaultProps: {
     props: {

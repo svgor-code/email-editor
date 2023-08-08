@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const ImageSettings: () => JSX.Element;
 export declare const ImageDefaultProps: {
     props: {

@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const DividerSettings: () => JSX.Element;
 export declare const DividerDefaultProps: {
     style: {

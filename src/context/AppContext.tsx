@@ -17,6 +17,7 @@ import {
 import { decodeJson, encodeJson } from "../core/design/utils/encryptJson";
 import { RenderNode } from "../core/design/utils/RenderNode";
 import { SnippetProvider } from "./SnippetContext";
+import { renderHtml } from "../core/repo/exportHtmlRepo";
 
 type Props = {
   defaultState?: {
@@ -33,6 +34,8 @@ export interface IAppContext {
   setEditorState: React.Dispatch<{ json: string; version: string } | null>;
   setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
   setEncoded: (state: string) => void;
+  getRenderedHtml: () => Promise<string>;
+  setUrlForRender: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const resolver = {
@@ -55,10 +58,16 @@ const defaultValue: IAppContext = {
   setEncoded: () => {
     throw new Error("Not in the context");
   },
+  getRenderedHtml: () => {
+    throw new Error("Not in the context");
+  },
   setEditorState: () => {
     throw new Error("Not in the context");
   },
   setTriggerFetchState: () => {
+    throw new Error("Not in the context");
+  },
+  setUrlForRender: () => {
     throw new Error("Not in the context");
   },
 };
@@ -70,8 +79,9 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
     json: string;
     version: string;
   } | null>(defaultState || null);
-  const [triggerFetchState, setTriggerFetchState] = useState(false);
+  const [urlForRender, setUrlForRender] = useState("");
   const [encodedState, setEncodedState] = useState<string>("");
+  const [triggerFetchState, setTriggerFetchState] = useState(false);
 
   const getCurrentEditor = (query: QueryCallbacksFor<typeof QueryMethods>) => {
     const json = query.serialize();
@@ -93,6 +103,24 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
     }
   };
 
+  const getRenderedHtml = async (): Promise<string> => {
+    if (!editorState || !urlForRender) {
+      return "";
+    }
+
+    const { json } = editorState;
+
+    try {
+      const craftNodes = JSON.parse(json);
+      const html = await renderHtml(craftNodes, urlForRender);
+
+      return html as string;
+    } catch (error) {
+      console.error(error);
+      return "";
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -101,6 +129,8 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
         triggerFetchState,
         setEncoded,
         setEditorState,
+        getRenderedHtml,
+        setUrlForRender,
         setTriggerFetchState,
       }}
     >

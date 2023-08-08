@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const ButtonSettings: () => JSX.Element;
 export declare const ButtonDefaultProps: {
     props: {

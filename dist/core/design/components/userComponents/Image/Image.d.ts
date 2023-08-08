@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const Image: {
     ({ props, style, parentStyle, ...rest }: {
         [x: string]: any;

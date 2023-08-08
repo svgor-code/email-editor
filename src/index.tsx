@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { SettingsProvider } from "./context/SettingsContext";
 import { decodeJson } from "./core/design/utils/encryptJson";
@@ -22,10 +22,15 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
     triggerFetchState,
     setEditorState,
     setTriggerFetchState,
+    setUrlForRender,
   } = useContext(AppContext);
 
   const [htmlState, setHtmlState] = useState(null);
   const [previewState, setPreviewState] = useState(null);
+
+  useEffect(() => {
+    setUrlForRender(editorSsrUrl);
+  }, []);
 
   const parseState = useCallback((stateArg) => {
     let stateJson = null;

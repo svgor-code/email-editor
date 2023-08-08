@@ -12,7 +12,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "tsc",
     "start": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -41,10 +41,8 @@
     "lzutf8": "^0.6.3",
     "material-ui-color": "^1.2.0",
     "pretty": "^2.0.0",
-    "react": "^17.0.1",
     "react-ace": "^10.1.0",
     "react-app-polyfill": "^3.0.0",
-    "react-dom": "^17.0.1",
     "react-perfect-scrollbar": "^1.5.8",
     "react-quill": "^2.0.0",
     "stream": "^0.0.2",

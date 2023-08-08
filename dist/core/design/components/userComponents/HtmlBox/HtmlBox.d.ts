@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const HtmlBox: {
     ({ props, parentStyle, style, ...rest }: {
         [x: string]: any;

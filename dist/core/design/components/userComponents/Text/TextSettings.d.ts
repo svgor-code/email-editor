@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare const TextSettings: () => JSX.Element;
 export declare const TextDefaultProps: {
     props: {
