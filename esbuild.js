@@ -16,6 +16,7 @@ esbuild
     plugins: [
       nodeExternalsPlugin({
         peerDependencies: true,
+        devDependencies: true,
       }),
       externalGlobalPlugin({
         react: "window.React",

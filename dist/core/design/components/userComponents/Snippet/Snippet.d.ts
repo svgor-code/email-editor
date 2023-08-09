@@ -9,9 +9,7 @@ export declare function Snippet({ props, parentStyle, style, children, ...rest }
 export declare namespace Snippet {
     var craft: {
         props: {
-            props: {
-                html: string;
-            };
+            props: any;
             parentStyle: {
                 marginBottom: number;
                 marginTop: number;

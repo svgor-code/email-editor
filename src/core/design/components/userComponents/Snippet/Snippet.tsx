@@ -1,5 +1,5 @@
 import { useEditor, useNode, Node } from "@craftjs/core";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import React, { useContext, useEffect } from "react";
 
 import { SnippetDefaultProps, SnippetSettings } from "./SnippetSettings";
@@ -16,9 +16,10 @@ interface CraftNode {
 export function Snippet({ props, parentStyle, style, children, ...rest }) {
   const {
     id,
+    actions: { setProp },
     connectors: { connect },
   } = useNode();
-  const { actions, query } = useEditor();
+
   const { currentSnippet, setCurrentSnippet } = useContext(SnippetContext);
 
   useEffect(() => {
@@ -26,80 +27,100 @@ export function Snippet({ props, parentStyle, style, children, ...rest }) {
       return;
     }
 
-    const newDecodedState = decodeJson(currentSnippet);
+    setProp((props) => {
+      const content_json = JSON.parse(decodeJson(currentSnippet.content_text));
 
-    if (newDecodedState) {
-      const parsedState = JSON.parse(newDecodedState);
-      const nodesForApply = JSON.parse(parsedState.json);
+      props.props = {
+        id: currentSnippet.id,
+        name: currentSnippet.name,
+        content_json: content_json.json,
+      };
+    });
 
-      const craftTree = nodesToCraftTree(nodesForApply);
-
-      if (craftTree) {
-        addNodesToEditor(craftTree);
-      }
-
-      setCurrentSnippet("");
-    }
+    setCurrentSnippet(null);
   }, [currentSnippet]);
 
-  const nodesToCraftTree = (nodes: any): CraftNode | null => {
-    function buildNode(id: string): CraftNode | null {
-      const node = nodes[id];
-      if (node) {
-        const craftNode: CraftNode = {
-          id,
-          data: {
-            type: resolver[node.type.resolvedName],
-            displayName: node.displayName,
-            props: node.props,
-            isCanvas: node.isCanvas,
-            hidden: node.hidden,
-            custom: node.custom,
-          },
-          children: node.nodes.map(buildNode).filter(Boolean),
-        };
+  console.log(props);
 
-        if (node.parent) {
-          craftNode.data.parent = node.parent;
-        }
+  // useEffect(() => {
+  //   if (!currentSnippet) {
+  //     return;
+  //   }
 
-        return craftNode;
-      }
+  //   const newDecodedState = decodeJson(currentSnippet);
 
-      return null;
-    }
+  //   if (newDecodedState) {
+  //     const parsedState = JSON.parse(newDecodedState);
+  //     const nodesForApply = JSON.parse(parsedState.json);
 
-    const rootId = Object.keys(nodes).find(
-      (id) => nodes[id].parent === "ROOT" || !nodes[id].parent
-    );
-    return rootId ? buildNode(rootId) : null;
-  };
+  //     const craftTree = nodesToCraftTree(nodesForApply);
 
-  const addNodesToEditor = (
-    node: CraftNode,
-    parentId: string = id,
-    index: number = 5
-  ) => {
-    let newIndex = index + 1;
-    const { data, children } = node;
+  //     if (craftTree) {
+  //       addNodesToEditor(craftTree);
+  //     }
 
-    const craftNode = query
-      .parseFreshNode({
-        data,
-      })
-      .toNode();
+  //     setCurrentSnippet("");
+  //   }
+  // }, [currentSnippet]);
 
-    actions.add(craftNode, parentId, newIndex);
+  // const nodesToCraftTree = (nodes: any): CraftNode | null => {
+  //   function buildNode(id: string): CraftNode | null {
+  //     const node = nodes[id];
+  //     if (node) {
+  //       const craftNode: CraftNode = {
+  //         id,
+  //         data: {
+  //           type: resolver[node.type.resolvedName],
+  //           displayName: node.displayName,
+  //           props: node.props,
+  //           isCanvas: node.isCanvas,
+  //           hidden: node.hidden,
+  //           custom: node.custom,
+  //         },
+  //         children: node.nodes.map(buildNode).filter(Boolean),
+  //       };
 
-    for (const child of children || []) {
-      addNodesToEditor(child, craftNode.id, newIndex);
-    }
-  };
+  //       if (node.parent) {
+  //         craftNode.data.parent = node.parent;
+  //       }
+
+  //       return craftNode;
+  //     }
+
+  //     return null;
+  //   }
+
+  //   const rootId = Object.keys(nodes).find(
+  //     (id) => nodes[id].parent === "ROOT" || !nodes[id].parent
+  //   );
+  //   return rootId ? buildNode(rootId) : null;
+  // };
+
+  // const addNodesToEditor = (
+  //   node: CraftNode,
+  //   parentId: string = id,
+  //   index: number = 5
+  // ) => {
+  //   let newIndex = index + 1;
+  //   const { data, children } = node;
+
+  //   const craftNode = query
+  //     .parseFreshNode({
+  //       data,
+  //     })
+  //     .toNode();
+
+  //   actions.add(craftNode, parentId, newIndex);
+
+  //   for (const child of children || []) {
+  //     addNodesToEditor(child, craftNode.id, newIndex);
+  //   }
+  // };
 
   return (
-    <div ref={connect} style={parentStyle} id={id}>
-      {children && children.props && children.props.children ? (
-        <>{children}</>
+    <Grid item id={id} xs={12} ref={connect} style={parentStyle}>
+      {props?.id ? (
+        <Typography variant="body2">{`{ snippet ${props.name} }`}</Typography>
       ) : (
         <Box
           bgcolor="#d9e7ff"
@@ -116,7 +137,7 @@ export function Snippet({ props, parentStyle, style, children, ...rest }) {
           <Typography variant="body2">Choose a snippet</Typography>
         </Box>
       )}
-    </div>
+    </Grid>
   );
 }
 

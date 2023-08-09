@@ -1,9 +1,7 @@
 /// <reference types="react" />
 export declare const SnippetSettings: () => JSX.Element;
 export declare const SnippetDefaultProps: {
-    props: {
-        html: string;
-    };
+    props: any;
     parentStyle: {
         marginBottom: number;
         marginTop: number;
