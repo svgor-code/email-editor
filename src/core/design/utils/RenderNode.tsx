@@ -39,8 +39,8 @@ const IndicatorDiv = styled.div`
 let keysDown = {};
 function titleCase(str) {
   const titleCases = {
-    sms: 'SMS',
-    whatsapp: 'WhatsApp',
+    sms: "SMS",
+    whatsapp: "WhatsApp",
   };
 
   return (
@@ -79,7 +79,7 @@ export const RenderNode = ({ render }) => {
 
   const { src, isSelected } = useEditor((state) => {
     const currentNodeId =
-      typeof state.events.selected === 'string' ? state.events.selected : id;
+      typeof state.events.selected === "string" ? state.events.selected : id;
     return {
       src: currentNodeId ? query.node(currentNodeId).get() : {},
       isSelected: Boolean(state.events.selected),
@@ -97,8 +97,8 @@ export const RenderNode = ({ render }) => {
 
   useEffect(() => {
     if (dom && id !== ROOT_NODE) {
-      dom.style.position = 'relative';
-      dom.style.transition = 'all 100ms ease-out';
+      dom.style.position = "relative";
+      dom.style.transition = "all 100ms ease-out";
     }
   }, [dom, isHover, isActive]);
 
@@ -134,9 +134,11 @@ export const RenderNode = ({ render }) => {
         .querySelector(".craftjs-renderer")
         .addEventListener("scroll", scroll);
       return function () {
-        document
-          .querySelector(".craftjs-renderer")
-          .removeEventListener("scroll", scroll);
+        const element = document.querySelector(".craftjs-renderer");
+
+        if (element) {
+          element.removeEventListener("scroll", scroll);
+        }
       };
     },
     [scroll]

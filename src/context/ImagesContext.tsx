@@ -23,7 +23,7 @@ export const ImagesContext = createContext<IImagesContext>(defaultValue);
 export const ImagesProvider = ({ children }) => {
   const [currentImgUrl, setCurrentImageUrl] = useState('');
   const [openImageManager, setOpenImageManager] = useState(false);
-
+  console.log(openImageManager);
   return (
     <ImagesContext.Provider
       value={{
