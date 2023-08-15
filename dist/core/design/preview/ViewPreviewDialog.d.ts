@@ -1,7 +1,5 @@
 /// <reference types="react" />
-declare function ViewPreviewDialog({ previewDoc, onClose, title }: {
-    previewDoc: any;
+declare function ViewPreviewDialog({ onClose }: {
     onClose: any;
-    title: any;
 }): JSX.Element;
 export default ViewPreviewDialog;

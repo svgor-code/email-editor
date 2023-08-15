@@ -81,7 +81,7 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
   } | null>(defaultState || null);
   const [urlForRender, setUrlForRender] = useState("");
   const [encodedState, setEncodedState] = useState<string>("");
-  const [triggerFetchState, setTriggerFetchState] = useState(false);
+  const [triggerFetchState, setTriggerFetchState] = useState(true);
 
   const getCurrentEditor = (query: QueryCallbacksFor<typeof QueryMethods>) => {
     const json = query.serialize();

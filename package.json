@@ -1,6 +1,6 @@
 {
   "name": "ts-email-editor",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Email Editor for React with SSR",
   "keywords": [
     "React",
@@ -13,7 +13,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "node esbuild.js && tsc --emitDeclarationOnly",
-    "start": "esbuild src/index.tsx --bundle --outdir=dist --watch",
+    "start": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "svgor",

@@ -15,7 +15,7 @@ type Props = {
 const settings = restoreSettings();
 
 export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
-  const [mode, setMode] = useState("");
+  const [mode, setMode] = useState("preview");
 
   const {
     editorState,
@@ -86,20 +86,19 @@ export const EmailEditorComponent = ({ editorSsrUrl }: Props) => {
 
   return (
     <SettingsProvider settings={settings}>
-      <Designer
-        loadState={editorState ? editorState["json"] : ""}
-        loadVersion={editorState ? editorState["version"] : ""}
-        triggerFetchState={triggerFetchState}
-        getState={getState}
-        onPreviewOpen={handlePreviewOpen}
-        onHtmlOpen={handleHtmlOpen}
-        editorSsrUrl={editorSsrUrl}
-      />
-      {mode === "preview" && (
+      {mode === "preview" ? (
         <ViewPreviewDialog
-          previewDoc={previewState}
           onClose={onClose}
-          title="Preview"
+        />
+      ) : (
+        <Designer
+          loadState={editorState ? editorState["json"] : ""}
+          loadVersion={editorState ? editorState["version"] : ""}
+          triggerFetchState={triggerFetchState}
+          getState={getState}
+          onPreviewOpen={handlePreviewOpen}
+          onHtmlOpen={handleHtmlOpen}
+          editorSsrUrl={editorSsrUrl}
         />
       )}
       {mode === "html" && <ViewHtmlDialog html={htmlState} onClose={onClose} />}
