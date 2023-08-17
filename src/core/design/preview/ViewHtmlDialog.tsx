@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +10,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Box } from "@material-ui/core";
 import Editor from "../../components/AceEditor";
 import { CircularProgress } from "@material-ui/core";
+import AppContext, { EditorMode } from "../../../context/AppContext";
 
 const decoder = require("he");
 const unescapeHTML = (htmlBody) => {
@@ -19,15 +20,23 @@ const unescapeHTML = (htmlBody) => {
   return decoder.decode(htmlBody);
 };
 
-function ViewHtmlDialog({ html, onClose }) {
-  if (!html) {
-    return <CircularProgress />;
-  }
+function ViewHtmlDialog() {
+  const [html, setHtml] = useState<string | null>(null);
+  const { mode, setMode, getRenderedHtml } = useContext(AppContext);
+
+  const setRenderedHtml = async () => {
+    const resultHtml = await getRenderedHtml();
+    setHtml(resultHtml);
+  };
+
+  useEffect(() => {
+    setRenderedHtml();
+  }, [getRenderedHtml]);
 
   return (
     <Dialog
-      open={true}
-      onClose={onClose}
+      open={mode === EditorMode.HTML}
+      onClose={() => setMode(EditorMode.PREVIEW)}
       fullWidth
       maxWidth="lg"
       aria-labelledby="max-width-dialog-title"
@@ -36,7 +45,7 @@ function ViewHtmlDialog({ html, onClose }) {
         <Box width="100%" display="flex" alignItems="center">
           <Typography variant="h4">HTML</Typography>
           <Box flexGrow={1} />
-          <IconButton onClick={onClose}>
+          <IconButton onClick={() => setMode(EditorMode.PREVIEW)}>
             <CloseIcon />
           </IconButton>
         </Box>

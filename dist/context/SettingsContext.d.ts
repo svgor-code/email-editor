@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 export declare enum THEMES {
     LIGHT = "LIGHT",
     ONE_DARK = "ONE_DARK",
     UNICORN = "UNICORN"
 }
 type Settings = {
-    direction: 'ltr' | 'rtl';
+    direction: "ltr" | "rtl";
     responsiveFontSizes: boolean;
     theme: THEMES;
 };

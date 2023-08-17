@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { ContainerDefaultProps } from '../userComponents/Container/ContainerSettings';
 import { Box } from '@material-ui/core';
 
-export default function Design({ editorState, onHtmlOpen }) {
+export default function Design({ editorState }) {
   const { actions, enabled, canUndo, canRedo, connectors, rootNode } =
     useEditor((state, query) => ({
       enabled: state.options.enabled,

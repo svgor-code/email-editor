@@ -1,16 +1,22 @@
-import _ from 'lodash';
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import _ from "lodash";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
-import { storeSettings } from '../utils/settings';
+import { storeSettings } from "../utils/settings";
+import {
+  StylesProvider,
+  ThemeProvider,
+  createGenerateClassName,
+  createTheme,
+} from "@material-ui/core";
 
 export enum THEMES {
-  LIGHT = 'LIGHT',
-  ONE_DARK = 'ONE_DARK',
-  UNICORN = 'UNICORN',
+  LIGHT = "LIGHT",
+  ONE_DARK = "ONE_DARK",
+  UNICORN = "UNICORN",
 }
 
 type Settings = {
-  direction: 'ltr' | 'rtl';
+  direction: "ltr" | "rtl";
   responsiveFontSizes: boolean;
   theme: THEMES;
 };
@@ -21,7 +27,7 @@ interface ISettingsContext {
 }
 
 const defaultSettings: Settings = {
-  direction: 'ltr',
+  direction: "ltr",
   responsiveFontSizes: true,
   theme: THEMES.LIGHT,
 };
@@ -49,13 +55,21 @@ export const SettingsProvider = ({ settings, children }) => {
     document.dir = currentSettings.direction;
   }, [currentSettings]);
 
+  const generateClassName = createGenerateClassName({
+    disableGlobal: true,
+    seed: "emailEditor",
+  });
+
   return (
     <SettingsContext.Provider
       value={{
         settings: currentSettings,
         saveSettings: handleSaveSettings,
-      }}>
-      {children}
+      }}
+    >
+      <StylesProvider generateClassName={generateClassName}>
+        <ThemeProvider theme={createTheme(settings || defaultSettings)}>{children}</ThemeProvider>
+      </StylesProvider>
     </SettingsContext.Provider>
   );
 };

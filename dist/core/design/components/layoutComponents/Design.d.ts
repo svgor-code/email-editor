@@ -1,5 +1,4 @@
 /// <reference types="react" />
-export default function Design({ editorState, onHtmlOpen }: {
+export default function Design({ editorState }: {
     editorState: any;
-    onHtmlOpen: any;
 }): JSX.Element;

@@ -31,7 +31,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Snackbar } from "@material-ui/core";
 import convertHandlebarStringToObject from "../utils/handleBarStringIntoObjects";
 import { CircularProgress } from "@material-ui/core";
-import AppContext from "../../../context/AppContext";
+import AppContext, { EditorMode } from "../../../context/AppContext";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -63,6 +63,17 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "rgba(0, 0, 0, 0.2)",
     borderWidth: 1,
   },
+  editBtn: {
+    height: "30px",
+    background: "#50B061",
+    color: "#ffffff",
+    border: "none",
+    padding: "6px 18px",
+
+    "&:hover": {
+      background: "#50B061",
+    },
+  },
 }));
 
 function Alert(props) {
@@ -85,10 +96,10 @@ function populateState(previewDoc) {
   };
 }
 
-function ViewPreviewDialog({ onClose }) {
+function ViewPreviewDialog() {
   const classes = useStyles();
-  const { getRenderedHtml } = useContext(AppContext);
-  const [formats, setFormats] = React.useState("laptop");
+  const { getRenderedHtml, setMode } = useContext(AppContext);
+  const [formats, setFormats] = React.useState("browser");
   const theme = useTheme();
   const [state, setState] = React.useState(null);
 
@@ -103,8 +114,6 @@ function ViewPreviewDialog({ onClose }) {
     const html = await getRenderedHtml();
     const template = html ? Handlebars.compile(html) : () => {};
     const newObj = populateState(html);
-    
-    console.log(html, template)
 
     setState({ data: newObj.data, template: template, previewDoc: html });
   };
@@ -161,7 +170,7 @@ function ViewPreviewDialog({ onClose }) {
     <Box>
       <Box>
         <Box display="flex" alignItems="center" width="100%">
-          <Box
+          {/* <Box
             flexGrow={2}
             display="flex"
             alignItems="center"
@@ -202,12 +211,16 @@ function ViewPreviewDialog({ onClose }) {
                 <OfflineBoltIcon color={dataOpen ? "primary" : "action"} />
               </IconButton>
             </Tooltip>
-          </Box>
-          <Box flexGrow={1} />
-          <Box display="flex" alignItems="flexEnd">
-            {onClose && (
-              <Button onClick={onClose}>Edit</Button>
-            )}
+          </Box> */}
+          <Box flexGrow={1}></Box>
+          <Box display="flex" alignItems="flexEnd" mb={1}>
+            <Button
+              className={classes.editBtn}
+              variant="outlined"
+              onClick={() => setMode(EditorMode.EDIT)}
+            >
+              Edit
+            </Button>
           </Box>
         </Box>
       </Box>

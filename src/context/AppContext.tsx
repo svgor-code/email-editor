@@ -27,10 +27,18 @@ type Props = {
   children: ReactNode;
 };
 
+export enum EditorMode {
+  PREVIEW = "preview",
+  EDIT = "edit",
+  HTML = "html"
+}
+
 export interface IAppContext {
+  mode: EditorMode;
   encodedState: string;
   triggerFetchState: boolean;
   editorState: { json: string; version: string } | null;
+  setMode: React.Dispatch<React.SetStateAction<EditorMode>>;
   setEditorState: React.Dispatch<{ json: string; version: string } | null>;
   setTriggerFetchState: React.Dispatch<React.SetStateAction<boolean>>;
   setEncoded: (state: string) => void;
@@ -52,9 +60,13 @@ export const resolver = {
 };
 
 const defaultValue: IAppContext = {
+  mode: EditorMode.PREVIEW,
   editorState: null,
   encodedState: "",
   triggerFetchState: false,
+  setMode: () => {
+    throw new Error("Not in the context");
+  },
   setEncoded: () => {
     throw new Error("Not in the context");
   },
@@ -75,6 +87,7 @@ const defaultValue: IAppContext = {
 const AppContext = createContext<IAppContext>(defaultValue);
 
 const AppContextProvider = ({ defaultState, children }: Props) => {
+  const [mode, setMode] = useState<EditorMode>(EditorMode.PREVIEW);
   const [editorState, setEditorState] = useState<{
     json: string;
     version: string;
@@ -124,9 +137,11 @@ const AppContextProvider = ({ defaultState, children }: Props) => {
   return (
     <AppContext.Provider
       value={{
+        mode,
         editorState,
         encodedState,
         triggerFetchState,
+        setMode,
         setEncoded,
         setEditorState,
         getRenderedHtml,

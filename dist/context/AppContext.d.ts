@@ -7,13 +7,20 @@ type Props = {
     };
     children: ReactNode;
 };
+export declare enum EditorMode {
+    PREVIEW = "preview",
+    EDIT = "edit",
+    HTML = "html"
+}
 export interface IAppContext {
+    mode: EditorMode;
     encodedState: string;
     triggerFetchState: boolean;
     editorState: {
         json: string;
         version: string;
     } | null;
+    setMode: React.Dispatch<React.SetStateAction<EditorMode>>;
     setEditorState: React.Dispatch<{
         json: string;
         version: string;
